@@ -1,0 +1,152 @@
+
+
+
+###### You can verification of the prepared data.  Works great
+
+python -m keras_segmentation verify_dataset \
+ --images_path="dataset1/images_prepped_train/" \
+ --segs_path="dataset1/annotations_prepped_train/"  \
+ --n_classes=50
+
+####### Visualize your prepared annotations
+'''
+# =============================================================================
+#   ****   Put mouse on image and hit a key to move from image to image ***
+# =============================================================================
+'''
+
+
+
+python -m keras_segmentation visualize_dataset \
+ --images_path="dataset1/images_prepped_train/" \
+ --segs_path="dataset1/annotations_prepped_train/"  \
+ --n_classes=255
+
+
+
+
+#######################  Training the Model if no Checkpoints 
+
+###   To train the model with no check points run the following command. However, you start from epoch 0. 
+
+python -m keras_segmentation train \
+ --checkpoints_path="weights/vgg_unet_1"  \
+ --train_images="dataset1/images_prepped_train/" \
+ --train_annotations="dataset1/annotations_prepped_train/" \
+ --val_images="dataset1/images_prepped_test/" \
+ --val_annotations="dataset1/annotations_prepped_test/" \
+ --n_classes=51 \
+ --epoch=1 \
+ --input_height=416 \
+ --input_width=608 \
+ --model_name="vgg_unet"
+
+
+
+
+
+#######################  Training the Model USING PREVIOUS CHECKPOINTS --WORK, but need to remane vgg_unet_1.0 to vgg_unet_1.x where x is the next save.
+
+python -m keras_segmentation train \
+ --checkpoints_path="weights/vgg_unet_1"  \
+ --load_weights="weights/vgg_unet_1.5"  \
+ --train_images="dataset1/images_prepped_train/" \
+ --train_annotations="dataset1/annotations_prepped_train/" \
+ --val_images="dataset1/images_prepped_test/" \
+ --val_annotations="dataset1/annotations_prepped_test/" \
+ --n_classes=51 \
+ --epoch=1 \
+ --input_height=416 \
+ --input_width=608 \
+ --model_name="vgg_unet"
+
+
+
+
+#######################  Training the Model USING AUTO_RESUME_CHECKPOINTS - does not work????
+
+python -m keras_segmentation train \
+ --checkpoints_path="weights/vgg_unet_1"  \
+ --auto_resume_checkpoint = True  \
+ --train_images="dataset1/images_prepped_train/" \
+ --train_annotations="dataset1/annotations_prepped_train/" \
+ --val_images="dataset1/images_prepped_test/" \
+ --val_annotations="dataset1/annotations_prepped_test/" \
+ --steps_per_epoch = 50 \
+ --n_classes=51 \
+ --epoch=1 \
+ --input_height=416 \
+ --input_width=608 \
+ --model_name="vgg_unet"
+
+
+
+
+
+
+
+################    Getting the predictions from the above trained model. ----- Works Great  -----
+# This takes the latest epoch to make the estimate. 
+#  To get the predictions of the latest trained model. 
+
+
+
+python -m keras_segmentation predict \
+ --checkpoints_path="weights/vgg_unet_1" \
+ --input_path="dataset1/images_prepped_test/" \
+ --output_path="weights/out/"
+
+
+
+
+
+##################     Model Evaluation
+
+#  To get the IoU scores and this works
+
+python -m keras_segmentation evaluate_model \
+ --checkpoints_path="weights/vgg_unet_1" \
+ --images_path="dataset1/images_prepped_test/" \
+ --segs_path="dataset1/annotations_prepped_test/"
+
+
+########################################################################
+###################       Notes      ###################################
+########################################################################
+
+PRETRAINED MODELS:   FROM KERAS_SEGMENTATION.PRETRAINED IMPORT PSPNET_50_ADE_20K: pretrained.py
+def model_from_checkpoint_path(model_config, latest_weights):
+   ## I added this: model = vgg_unet(n_classes=51 ,  input_height=416, input_width=608  )
+
+def resnet_pspnet_VOC12_v0_1():384x576x24
+
+def pspnet_50_ADE_20K():473x473 pretrained model trained on ADE20k dataset
+
+def pspnet_101_cityscapes():713 x 713 pretrained model trained on Cityscapes dataset
+
+def pspnet_101_voc12(): 473x473 pretrained model trained on Pascal VOC 2012 dataset
+
+
+
+MODELS.unet.py:
+
+def unet(n_classes, input_height=416, input_width=608, encoder_level=3):
+    model.model_name = "unet"
+
+def vgg_unet(n_classes, input_height=416, input_width=608, encoder_level=3):
+    model.model_name = "vgg_unet"
+ 
+def resnet50_unet(n_classes, input_height=416, input_width=608, encoder_level=3):
+    model.model_name = "resnet50_unet"
+
+def mobilenet_unet(n_classes, input_height=224, input_width=224, encoder_level=3):
+    model.model_name = "mobilenet_unet"
+
+
+
+
+
+
+
+
+
