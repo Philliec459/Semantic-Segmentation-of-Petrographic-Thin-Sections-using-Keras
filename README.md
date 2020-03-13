@@ -3,21 +3,21 @@ This repository was inspired from Divam Gupta's GitHub repository on Image Segme
 
 https://github.com/divamgupta/image-segmentation-keras
 
-Our primary goal in this repository is to discriminate 5 different types of grains observed in clastic petrographic thin sections. This is still work in progress. We will also try to estimate the Petrophysical Rock Types and Petrophysical properties from a clastic Thin Section photomicrograph as the project progresses.
+Our primary goal in this repository is to discriminate 5 different objects observed in clastic petrographic thin sections. This is still work in progress. Our next objective will be to classify Petrophysical Rock Types and Petrophysical properties totally based on Thin Section photomicrograph of the rock. 
 
 This is an example of a typiclal clastic thin section that we are working with in our test data:
 
 ![Image](5ts.png)
 
-This is an example of the predicted output from this process. 
+This is an example of the predicted output from this image segmentation process. 
 
 ![Image](5predict.png)
 
-We are predicting 5 primary segment types predicted from the python program main_load_your_own_model_from_existing_checkpoint.py where the checkpoint weights are stored int the 'weights/' subdirectory. We are not furnishing the original training data due to the proprietary nature of these data. Our test images were taken from the web trying to obtain similar thin sections from clastic rock as was the training data. 
+We are predicting 5 primary segments or objects from our test Thin Sections using the python program main_load_your_own_model_from_existing_checkpoint.py where the checkpoint weights are stored int the 'weights/' subdirectory. We are not furnishing the original training data due to the proprietary nature of these data. Our test images were downloaded from the web where we are trying to use similar thin sections from clastic rock as was the training set data. 
 
-(At this time I am unable to supply the vgg_unet_1 type of weights file due to a size restriction in GitHub. I also have one computer running training epochs too for future uploads of the checkpoint weights). 
+(At this time I am unable to supply the vgg_unet_1 type of weights file due to a size restriction in GitHub.) 
 
-One issue that we are having is re-coloring the predicted results to be a bit more intuitive. Please see the example below as our first attempt. 
+We will want to re-coloring our predicted results to be a bit more intuitive and match the colors in the original Thin Sections a bit better. Please see the example below as our first attempt of this re-colorization. 
 
 ![Image](5_recolor.png)
 
