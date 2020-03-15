@@ -26,14 +26,15 @@ model=model_from_checkpoint_path("weights/vgg_unet_1")
 
 
 model.train(
+    checkpoints_path = "weights/vgg_unet_1" ,
+    load_weights = "weights/vgg_unet_1.4"  ,   
     train_images =  "dataset1/images_prepped_train/",
     train_annotations = "dataset1/annotations_prepped_train/",
     val_images="dataset1/images_prepped_test/" ,
     val_annotations="dataset1/annotations_prepped_test/",
     verify_dataset=True,
-#    load_weights="weights/vgg_unet_1.4" ,
     optimizer_name='adadelta' , do_augment=True , augmentation_name="aug_all",    
-    checkpoints_path = "weights/vgg_unet_1" , epochs=1
+    epochs=1
 )
 
 
@@ -44,35 +45,35 @@ model.summary()
 # The '.h5' extension indicates that the model should be saved to HDF5.
 model.save('vgg_unet_1.h5') 
 
-#predict an image from the training data
-out = model.predict_segmentation(
-    checkpoints_path="weights/vgg_unet_1" , 
-    inp="dataset1/images_prepped_test/43.jpg",
-    out_fname="newout.png"
-)
+##predict an image from the training data
+#out = model.predict_segmentation(
+#    checkpoints_path="weights/vgg_unet_1" , 
+#    inp="dataset1/images_prepped_test/43.jpg",
+#    out_fname="newout.png"
+#)
 
 
 
 
 
-# Show Images
-img = Image.open("dataset1/images_prepped_test/43.jpg")
-plt.figure(1)
-plt.imshow(img)
-
-plt.figure(2)
-plt.imshow(out)
-
-
-
-from keras_segmentation.predict import predict
+## Show Images
+#img = Image.open("dataset1/images_prepped_test/43.jpg")
+#plt.figure(1)
+#plt.imshow(img)
+#
+#plt.figure(2)
+#plt.imshow(out)
 
 
-predict( 
-	checkpoints_path="weights/vgg_unet_1"  , 
-	inp= "dataset1/images_prepped_test/43.jpg" , 
-	out_fname="43_predict.png" 
-)
+
+#from keras_segmentation.predict import predict
+#
+#
+#predict( 
+#	checkpoints_path="weights/vgg_unet_1"  , 
+#	inp= "dataset1/images_prepped_test/43.jpg" , 
+#	out_fname="43_predict.png" 
+#)
 
 
 
