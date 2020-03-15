@@ -27,7 +27,7 @@ model=model_from_checkpoint_path("weights/vgg_unet_1")
 
 model.train(
     checkpoints_path = "weights/vgg_unet_1" ,
-    load_weights = "weights/vgg_unet_1.4"  ,   
+    #load_weights = "weights/vgg_unet_1.4"  ,   
     train_images =  "dataset1/images_prepped_train/",
     train_annotations = "dataset1/annotations_prepped_train/",
     val_images="dataset1/images_prepped_test/" ,
