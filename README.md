@@ -3,17 +3,20 @@ This repository was inspired from Divam Gupta's GitHub repository on Image Segme
 
 https://github.com/divamgupta/image-segmentation-keras
 
+This is a brilliant repository that has served as the foundation for numerous image segmentation applications that are available on the web today.
+
 ## Objectives
-The primary goal in this repository is to discriminate 5 different objects observed in typical clastic rock petrographic thin sections. This is still work in progress and our next objectives will be to classify Petrophysical Rock Types and Petrophysical properties; totally based on Thin Section photomicrograph of the rock. 
+The primary goal for this repository is to discriminate 5 different image objects observed in typical clastic rock petrographic Thin Sections. This is still work in progress.  Our next objectives will be to classify Petrophysical Rock Types (PRT) and Petrophysical properties based on image segmentation where our estimates will be based totally on Thin Section photomicrograph of the rock. 
 
 
 ## Typical Thin Section
-The following image is an example of a typiclal clastic thin section that we are working with in our training and test data:
+The following image is an example of a typiclal sandstone Thin Section similar to what we are working with in our training data:
 
 ![Image](5ts.png)
 
+
 ## Data used for Training
-Our primary training data was setup similar to what Mr. Gupta had done for his repository that is mentioned above. Our only exception is that we have used Thin Section images for training and testing:
+Our primary training data was setup similar to what Mr. Gupta had done for his repository that is mentioned above. Our only exception is that we have used Thin Section images for both training and testing using the following data structure:
 
     dataset1
       --images_prepped_train
@@ -21,12 +24,14 @@ Our primary training data was setup similar to what Mr. Gupta had done for his r
       --annotations_prepped_train
       --annotations_prepped_test
 
+
 For our training data we have used 40 Thin section images for the intial training with 40 matching annotation images that were created using the methodology explained in the following GitHub repository:
 
 https://github.com/Philliec459/Create-Thin-Section-Image-Labels-for-Image-Segmentation-Training
 
+
 ## Annotated Images
-Our annotated images have 5 labeled segments ranging from 1 to 5 representing 5 distinguishable features observed in the Thin Section. We then partition the gray-level image data into different bins which will serve as our labels:
+Our annotated images have 5 labeled segments ranging from 1 to 5 representing 5 distinguishable features observed in the Thin Section. We first create a gray-level image on the Thin section and then partition the gray-level image data into different bins which represent as our labels:
 
     label = np.zeros(gradient.shape )
 
@@ -35,6 +40,7 @@ Our annotated images have 5 labeled segments ranging from 1 to 5 representing 5 
     label[gradient > 0.4]  = 3 #blue-dye epoxy or visual porosity  
     label[gradient > 0.6]  = 4 #darker grains 
     label[gradient > 0.75] = 5 #bright quartz grains   
+
 
 ## Training Code
 For the training portion of the project we used 40 training images and 20 validation images in datset1. These data are not being provided in this repository. The following was our training code:
@@ -86,22 +92,30 @@ For the training portion of the project we used 40 training images and 20 valida
       out_dir="weights/out/" 
     )
 
+
 ## Test Data
 For the test data that is provided in this repository we are providing 12 "dataset1/images_prepped_test/" with matching 12 "dataset1/annotations_prepped_test/" image files. We are using the same code as shown above for training except for commenting out the training portion of the code.  
+
 
 ## Predicted Results
 The predict_multiple predicted Thin Sections for these test data that were written to "weights/out/". This is an example of the predicted output from this image segmentation process. 
 
+
 ![Image](5predict.png)
+
+
 
 We are predicting 5 primary segments or objects from our test Thin Sections using the python program main_load_your_own_model_from_existing_checkpoint.py where the checkpoint weights are stored int the 'weights/' subdirectory. We are not furnishing the original training data due to the proprietary nature of these data. Our test images were downloaded from the web where we are using similar Thin Sections from clastic rock as was the training set data. 
 
 (At this time I am unable to supply the vgg_unet_1 type of weights file due to a size restriction in GitHub.) 
 
+
 ## Trying to Create a more Intuitive Color Scheme
 We would like to re-coloring our predicted results to be a bit more intuitive and match the colors in the original Thin Sections a bit better. Please see the example below as our first attempt of this re-colorization. 
 
+
 ![Image](5_recolor.png)
+
 
 For this step we are using the review_predictions_and_create_better_color_pedictions.py program code gathering the predictions from 'weights/out/' subdirectory and writing out our new color presentations to the 'weights/out_color/' subdirectory. 
 
