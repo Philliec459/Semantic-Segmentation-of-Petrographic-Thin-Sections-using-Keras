@@ -3,11 +3,89 @@ This repository was inspired from Divam Gupta's GitHub repository on Image Segme
 
 https://github.com/divamgupta/image-segmentation-keras
 
-Our primary goal in this repository is to discriminate 5 different objects observed in clastic petrographic thin sections. This is still work in progress. Our next objective will be to classify Petrophysical Rock Types and Petrophysical properties totally based on Thin Section photomicrograph of the rock. 
+The primary goal in this repository is to discriminate 5 different objects observed in typical clastic rock petrographic thin sections. This is still work in progress and our next objectives will be to classify Petrophysical Rock Types and Petrophysical properties; totally based on Thin Section photomicrograph of the rock. 
 
-This is an example of a typiclal clastic thin section that we are working with in our test data:
+The following image is an example of a typiclal clastic thin section that we are working with in our training and test data:
 
 ![Image](5ts.png)
+
+Our primary training data was setup similar to what Mr. Gupta had done for his repository that is mentioned above. Our only exception is that we have used Thin Section images for training and testing:
+
+  dataset1
+    --images_prepped_train
+    --images_prepped_test
+    --annotations_prepped_train
+    --annotations_prepped_test
+
+For our training data we have used 40 Thin section images for the intial training with 40 matching annotation images that were created using the methodology explained in the following GitHub repository:
+
+https://github.com/Philliec459/Create-Thin-Section-Image-Labels-for-Image-Segmentation-Training
+
+# Anotated Images
+Our annotated images have 5 labeled segments ranging from 1 to 5 representing 5 distinguishable features observed in the Thin Section. We then partition the gray-level image data into different bins which will serve as our labels:
+
+    label = np.zeros(gradient.shape )
+
+    label[gradient < 0.25] = 1 #black grains 
+    label[gradient > 0.25] = 2 #darker grains
+    label[gradient > 0.4]  = 3 #blue-dye epoxy or visual porosity  
+    label[gradient > 0.6]  = 4 #darker grains 
+    label[gradient > 0.75] = 5 #bright quartz grains   
+
+# Training Code
+
+For the training portion of the project we used 40 trainging images and 20 validation images in datset1. These data are not being provided in this repository. The following was out training code:
+
+  from keras_segmentation.models.unet import vgg_unet
+  from keras_segmentation.predict import model_from_checkpoint_path
+
+
+  model = vgg_unet(
+          n_classes=51 ,  
+          input_height=416, 
+          input_width=608 
+  )
+
+
+  model=model_from_checkpoint_path("weights/vgg_unet_1")
+
+  model.train(
+      train_images =  "dataset1/images_prepped_train/",
+      train_annotations = "dataset1/annotations_prepped_train/",
+      val_images="dataset1/images_prepped_test/" ,
+      val_annotations="dataset1/annotations_prepped_test/",
+      verify_dataset=True,
+      load_weights="weights/vgg_unet_1.0" ,
+      optimizer_name='adadelta' , do_augment=True , augmentation_name="aug_all",    
+      checkpoints_path = "weights/vgg_unet_1" , epochs=5
+  )
+
+
+  # Display the model's architecture
+  model.summary()
+
+  # Save the entire model to a HDF5 file.
+  # The '.h5' extension indicates that the model should be saved to HDF5.
+  model.save('vgg_unet_1.h5') 
+
+  #predict an image from the training data
+  out = model.predict_segmentation(
+      checkpoints_path="weights/vgg_unet_1" , 
+      inp="dataset1/images_prepped_test/43.jpg",
+      out_fname="newout.png"
+  )
+
+  from keras_segmentation.predict import predict_multiple
+  
+  predict_multiple( 
+    checkpoints_path="weights/vgg_unet_1" , 
+    inp_dir="dataset1/images_prepped_test/" , 
+    out_dir="weights/out/" 
+  )
+
+
+
+
 
 This is an example of the predicted output from this image segmentation process. 
 
