@@ -61,11 +61,11 @@ For the training portion of the project we used 40 trainging images and 20 valid
   )
 
 
-  # Display the model's architecture
+  #Display the model's architecture
   model.summary()
 
-  # Save the entire model to a HDF5 file.
-  # The '.h5' extension indicates that the model should be saved to HDF5.
+  #Save the entire model to a HDF5 file.
+  #The '.h5' extension indicates that the model should be saved to HDF5.
   model.save('vgg_unet_1.h5') 
 
   #predict an image from the training data
