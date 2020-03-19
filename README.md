@@ -10,7 +10,7 @@ The primary goal for this repository is to discriminate 5 different image object
 
 
 ## Typical Thin Section
-The following image is an example of a typiclal Sandstone Thin Section similar to what we are working with in our training data:
+The following image is an example of a typical Sandstone Thin Section similar to what we are working with in our training data:
 
 ![Image](5ts.png)
 
@@ -25,7 +25,7 @@ Our primary training data was setup similar to what Mr. Gupta had done for his r
       --annotations_prepped_test
 
 
-For our training data we have used 40 Thin section images for the intial training with 40 matching annotation images that were created using the methodology explained in the following GitHub repository:
+For our training data we have used 40 Thin section images for the initial training with 40 matching annotation images that were created using the methodology explained in the following GitHub repository:
 
 https://github.com/Philliec459/Create-Thin-Section-Image-Labels-for-Image-Segmentation-Training
 
@@ -110,7 +110,7 @@ We are predicting 5 primary segments or objects from our test Thin Sections usin
 (At this time I am unable to supply the vgg_unet_1 type of weights file due to a size restriction in GitHub.) 
 
 ## Way Forward 
-In the futue we will want to be able to classify the Thin Sections into Petrophysical Rock Types (PRT) based on this image segmentation so that each PRT will have similar Petrophysical properties (Porosity, Permeability) withing each Rock Type. Since we have the Petrophysical property data for our training set data, we can easily create regressions for these predictions. However, is this possible through our image segmentation work? 
+In the future we will want to be able to classify the Thin Sections into Petrophysical Rock Types (PRT) based on this image segmentation so that each PRT will have similar Petrophysical properties (Porosity, Permeability) within each Rock Type. Since we have the Petrophysical property data for our training set data, we can easily create regressions for these predictions. However, is this possible through our image segmentation work? 
 
 
 ## Trying to Create a more Intuitive Color Scheme
