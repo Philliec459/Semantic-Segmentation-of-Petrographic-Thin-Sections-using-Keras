@@ -98,38 +98,32 @@ For the test image Thin Section data that is provided in this repository, we are
 
 
 ## Predicted Results
-We are using the same code as shown above for testing except that we have commenting out the training portion of the code (model.train).  
+We are using the same code as shown above for testing except that we have commented out the training portion of the code (model.train) for our image segmentation predictions.  
 
-The predict_multiple predicted Thin Sections for these test data that were written to "weights/out/". This is an example of the predicted output from this image segmentation process. 
-
-
-![Image](5predict.png)
+The predict_multiple predicted Thin Sections for these test data were written to the "weights/out/" subdirectory. The following shows the process flow from the original Thin Section image, to the annotated image and finally to the predicted image shown in the upper right of the image below. 
 
 
-
-This above predicted image is actually a RGB image scaled from 0 to 256 which appears to show the image segmentation. The histogram of the predicted images is in sharp contrast to the rather Gaussian distribution observed from the original Thin Section image.
-
-
-![Image](5predict_histogram.png)
+![Image](Process_Histograms.png)
 
 
-We are predicting 5 primary segments or objects from our test Thin Sections using the python program "main_load_your_own_model_from_existing_checkpoint.py" where the checkpoint weights being used are stored int the "weights/" subdirectory. We are not furnishing the original training data due to the proprietary nature of these data, however; our test images were downloaded from the web and are similar in Clastic sandstone Rock Types to the training data. 
+This above predicted image in the upper right is a RGB image scaled from 0 to 256. The histogram of the predicted image appears to illustrate the image segmentation. The histogram of the predicted images is in sharp contrast to the rather Gaussian distribution observed from the original Thin Section image on the left. The following image shows the frequencey histograms for all RGB values:
+
+
+![Image](RGB_histogram.png)
+
+
+We are predicting 5 primary image segments or objects on our test Thin Sections using the python program "main_load_your_own_model_from_existing_checkpoint.py" where the checkpoint weights being used are stored int the "weights/" subdirectory. We are not furnishing the original training data due to the proprietary nature of these data, however; our test images were downloaded from the web and are similar in Clastic sandstone Rock Types to the training data. 
 
 (At this time I am unable to supply the vgg_unet_1 type of weights file due to a size restriction in GitHub.) 
 
 
 ## Way Forward 
-In the future we will want to be able to classify the Thin Sections into Petrophysical Rock Types (PRT) based on this image segmentation so that each PRT will have similar Petrophysical properties (Porosity, Permeability) within each Rock Type. Since we have the Petrophysical property data for our training set data, we can easily create regressions for these predictions. However, is this possible through our image segmentation work? 
+The comparison of the of the original vs. the predicted, segmented Thin Section From the image below demonstrates that the image segmentation process is discriminating various features observed in the Thin Section. In the future we will want use this image segmentation to classify the Thin Sections into Petrophysical Rock Types (PRT) based on this process. Each PRT should also have similar Petrophysical properties (Porosity, Permeability) within each Rock Type. Since we have the Petrophysical property data avalable from our training data set, we could easily create regressions methods for these estimations. This would be the more traditional approach, however, we plan on performing this estimation directly from image segmentation.  
 
 
-## Trying to Create a more Intuitive Color Scheme
-We would also like to re-coloring our predicted results to be a bit more intuitive and match the colors from the original Thin Sections. Please see the example below as our first attempt of this re-colorization. 
+![Image](Preducted_comparison.png)
 
-
-![Image](5_recolor.png)
-
-
-For this step we are using the review_predictions_and_create_better_color_pedictions.py program code gathering the predictions from 'weights/out/' subdirectory and writing out our new color presentations to the 'weights/out_color/' subdirectory. 
+In the above image we have used the "interactive_plot.py" driven from a command line xterm to observe the RGB values of each segment. 
 
 For this repository we have been working on a Ubuntu workstation, and each python program has been driven from an xterm command line. 
 
