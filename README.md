@@ -94,7 +94,7 @@ For the training portion of the project we used 40 training images and 20 valida
 
 
 ## Test Data
-For the test image Thin Section data that is provided in this repository, we are providing 12 "dataset1/images_prepped_test/" images with 12 matching "dataset1/annotations_prepped_test/" image files. We ae using "review_images_Create_Labels_out_gray.py" to create the labeled, annotated images from the test imates. We are writing out the annotated images to "dataset1/annotations_prepped_test/". The labeled images are scaled from 1 to 5 representing the n_classes. However, it does not appear that the annotated images are used in the predictive mode. 
+For the test image Thin Section data that is provided in this repository, we are providing 12 "dataset1/images_prepped_test/" images with 12 matching "dataset1/annotations_prepped_test/" image files. We ae using "review_images_Create_Labels_out_gray.py" to create the labeled, annotated images from the test images. We are writing out the annotated images to "dataset1/annotations_prepped_test/". The labeled images are scaled from 1 to 5 representing the n_classes. However, it does not appear that the annotated images are used in the predictive mode. 
 
 
 ## Predicted Results
@@ -106,10 +106,10 @@ The predict_multiple predicted Thin Sections for these test data were written to
 ![Image](Process_Histograms.png)
 
 
-This above predicted image in the upper right is a RGB image scaled from 0 to 256. The histogram of the predicted image appears to illustrate the image segmentation. The histogram of the predicted images is in sharp contrast to the rather Gaussian distribution observed from the original Thin Section image on the left. The following image shows the frequencey histograms for all RGB values:
+This above predicted image in the upper right is a RGB image scaled from 0 to 256. The histogram of the predicted image appears to illustrate the image segmentation. The histogram of the predicted images is in sharp contrast to the rather Gaussian distribution observed from the original Thin Section image on the left. The following image shows the frequency histograms for all RGB values:
 
 
-![Image](RGB_histogram.png)
+![Image](RGB_histograms.png)
 
 
 We are predicting 5 primary image segments or objects on our test Thin Sections using the python program "main_load_your_own_model_from_existing_checkpoint.py" where the checkpoint weights being used are stored int the "weights/" subdirectory. We are not furnishing the original training data due to the proprietary nature of these data, however; our test images were downloaded from the web and are similar in Clastic sandstone Rock Types to the training data. 
@@ -118,12 +118,14 @@ We are predicting 5 primary image segments or objects on our test Thin Sections 
 
 
 ## Way Forward 
-The comparison of the of the original vs. the predicted, segmented Thin Section From the image below demonstrates that the image segmentation process is discriminating various features observed in the Thin Section. In the future we will want use this image segmentation to classify the Thin Sections into Petrophysical Rock Types (PRT) based on this process. Each PRT should also have similar Petrophysical properties (Porosity, Permeability) within each Rock Type. Since we have the Petrophysical property data avalable from our training data set, we could easily create regressions methods for these estimations. This would be the more traditional approach, however, we plan on performing this estimation directly from image segmentation.  
+The comparison of the of the original vs. the predicted, segmented Thin Section From the image below demonstrates that the image segmentation process is discriminating various features observed in the Thin Section. In the future we will want use this image segmentation to classify the Thin Sections into Petrophysical Rock Types (PRT) based on this process. Each PRT should also have similar Petrophysical properties (Porosity, Permeability) within each Rock Type. Since we have the Petrophysical property data available from our training data set, we could easily create regressions methods for these estimations. This would be the more traditional approach, however, we plan on performing this estimation directly from image segmentation.  
 
 
-![Image](Preducted_comparison.png)
+![Image](Predicted_comparison.png)
 
-In the above image we have used the "interactive_plot.py" driven from a command line xterm to observe the RGB values of each segment. 
+
+
+For the above image we have used the "interactive_plot.py" driven from a command line xterm to observe the RGB values representing each segment. 
 
 For this repository we have been working on a Ubuntu workstation, and each python program has been driven from an xterm command line. 
 
