@@ -28,8 +28,8 @@ for i in range(1,13,1):    #offset = int(input('Input Integer Offset = '))
     #offset_plus = 50
 #    img=os.path.join('dataset1/annotations_prepped_train', TS + '.png') #1-39
 #    img=os.path.join('dataset1/annotations_prepped_test', TS + '.png') #40-60
-#    img=os.path.join('dataset1/annotations_prepped_test', TS + '.png') #1-12 for new test set
-    img=os.path.join('ClasticThinSectionsLabels', TS + '.png')
+    img=os.path.join('dataset1/annotations_prepped_test', TS + '.png') #1-12 for new test set
+#    img=os.path.join('ClasticThinSectionsLabels', TS + '.png')
 #    img=os.path.join('ClasticThinSectionsLabels2', TS + '.png')
 #    TS_Im = Image.open(img).convert('L')
     TS_Im = Image.open(img)
@@ -60,10 +60,10 @@ for i in range(1,13,1):    #offset = int(input('Input Integer Offset = '))
    
     
     
-    plt.figure(0)
+    plt.figure(i)
     plt.imshow(data)  #Original Image
 
-    plt.figure(1)    
+    plt.figure(i+1)    
     histogram, bin_edges = np.histogram(data, bins=256, range=(0.0, 10))   
     plt.title(" Histogram Original Image")
     plt.xlabel(" value")
