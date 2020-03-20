@@ -118,15 +118,17 @@ We are predicting 5 primary image segments or objects from our test Thin Section
 
 
 ## Way Forward 
-The figure below shows a comparison of the of the original vs. the predicted, segmented Thin Section.  This figure demonstrates that the image segmentation process is discriminating various features observed in the Thin Section images. In the future we will use image segmentation to classify the Thin Sections into Petrophysical Rock Types (PRT) based on this process. Each PRT should also have similar Petrophysical properties (Porosity, Permeability) within each rock type. Since we have the Petrophysical property data available from our training data set, we could easily create regressions algorithms for these estimations. This would be the more traditional approach, however, we plan on performing this estimation directly from image segmentation.  
+The figure below shows a comparison of the of the original vs. the predicted, segmented Thin Section.  This figure demonstrates that the image segmentation process is discriminating various features observed in the Thin Section images. In the future we will use image segmentation to classify the Thin Sections into Petrophysical Rock Types (PRT) based on this process. Each PRT should also have similar Petrophysical properties (Porosity, Permeability) within each rock type. Since we have the Petrophysical property data available from our training data set, we could easily create regressions algorithms for these estimations. This would be the more traditional approach, however; for this application we plan on performing this estimation directly from image segmentation correlated to the core Petrophysial data.  
 
 
 ![Image](Predicted_comparison.png)
 
 
 
-For the above image on the left we have used the "interactive_plot.py" driven from a command line xterm to observe the RGB values representing each segment. 
+For the above image on the left we have used the "interactive_plot.py" driven from a command line xterm to observe the RGB values representing each image segment. 
 
-In this repository we have been working on a Ubuntu workstation, and each python program has been driven from an xterm command line. 
+In another reposity under Philliec459 we discuss using kMean clusters to segregate these image data. Unfortunately, at this point without PRT classification the mKean technique requires n clusters. In a poor quality rock we might only have 2 clusters for segmentation where in a better quality rock we could have 5 clusters for segments. We will need to assign the number of clusters to the PRT before using this technique. By using the image segmentation techniques as proposed from Divam Gupta, our annotated images inherently contained the correct number of segments, and this was not an issue. 
+
+For this repository we have been working on a Ubuntu workstation, and each python program has been driven from an xterm command line. 
 
 
