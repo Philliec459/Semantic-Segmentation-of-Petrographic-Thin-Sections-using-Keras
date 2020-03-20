@@ -129,6 +129,11 @@ For the above image on the left we have used the "interactive_plot.py" driven fr
 
 This method appears to provide a objective approach to image segmentation. In another reposity under Philliec459 we discuss using kMean clusters to segregate these image features. Unfortunately, at this point without PRT classification the mKean technique will not work. The kMean method requires user input for the number of clusters. The number of clusters will be dynamic depending on rock type. In a poor quality rock we might only have 2 clusters for segmentation where in a better quality rock we could have 5 clusters for segments. For kMean we need to assign the number of clusters needed for each PRT before employing this technique. By using the image segmentation techniques as proposed from Divam Gupta, our annotated images inherently contained the correct number of segments for each Thin Section so that this was not an issue. 
 
+
+
+![Image](nclusters.png)
+
+
 For this repository we have been working on a Ubuntu workstation, and each python program has been driven from an xterm command line. 
 
 
