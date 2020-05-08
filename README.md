@@ -1,4 +1,4 @@
-# ThinSection-image-segmentation-Keras
+# ThinSection-Semantic-Image-Segmentation-Keras
 This repository was inspired from Divam Gupta's GitHub repository on Image Segmentation Keras:
 
 https://github.com/divamgupta/image-segmentation-keras
